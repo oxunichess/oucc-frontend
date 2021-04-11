@@ -23,7 +23,7 @@ axios.interceptors.request.use(async (c) => {
 	let x = Object.assign({}, c, {
 		headers: {
 			...(process.env.GITHUB_SECRET ? {
-				Authorization: `token ${process.env.GITHUB_SECRET}`
+				Authorization: `token ${process.env.GITHUB_SECRET.trim()}`
 			} : {}),
 			...c.headers
 		},

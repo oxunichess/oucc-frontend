@@ -47,10 +47,7 @@ export default function Album(props: AlbumProps) {
 				baseURL: 'https://api.github.com/repos/oxfordunichess/oucc-backend/contents/',
 				url: url.resolve('pages/', props.src),
 				method: 'get',
-				maxRedirects: 5,
-				headers: {
-					Authorization: `token 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`
-				}
+				maxRedirects: 5
 			})
 				.then(res => res.data)
 				.then((data) => {

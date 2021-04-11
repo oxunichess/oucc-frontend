@@ -84,12 +84,17 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
 	
 	const data = await axios({ url: '/index.json' })
-		.then(res => res.data) as IndexData;
+		.then(res => res.data)
+		.catch(console.error) as IndexData;
 	let index = ctx.params!.index;
 	let indexArr = typeof index === 'string' ?
 		index = [index] :
 		index || ['main'];
 	let k = indexArr.join('/');
+
+	if (!data) return {
+		notFound: true
+	};
 	let v = data[k];
 
 	if (!v) return {
@@ -105,14 +110,18 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 	}
 
 	let file = v.file || k;
-	let page: string = await axios({ url: `/pages/${file}.md` }).then(r => r.data);
+	let page: string = await axios({ url: `/pages/${file}.md` })
+		.then(r => r.data)
+		.catch(console.error);
 	if (!page) return {
 		notFound: true
 	};
 
 	let calendar = null as CalendarGivenProps;
 	if (page.includes('<Calendar')) {
-		calendar = await axios({ url: '/calendar.json' }).then(r => r.data);
+		calendar = await axios({ url: '/calendar.json' })
+			.then(r => r.data)
+			.catch(console.error);
 		if (!calendar) return {
 			notFound: true
 		}
