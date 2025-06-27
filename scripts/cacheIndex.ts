@@ -3,7 +3,7 @@ import * as path from 'path';
 import axios from 'axios';
 import { IndexData } from '../src/interfaces';
 
-axios.defaults.baseURL = 'https://oxfordunichess.github.io/oucc-backend/';
+axios.defaults.baseURL = 'https://github.com/oxunichess/oucc-backend';
 
 function getIndex(): Promise<IndexData> {
 	return axios({
