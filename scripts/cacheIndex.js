@@ -3,7 +3,7 @@ exports.__esModule = true;
 var fs = require("fs");
 var path = require("path");
 var axios_1 = require("axios");
-axios_1["default"].defaults.baseURL = 'https://oxfordunichess.github.io/oucc-backend/';
+axios_1["default"].defaults.baseURL = 'https://github.com/oxunichess/oucc-backend';
 function getIndex() {
     return axios_1["default"]({
         url: 'index.json',
